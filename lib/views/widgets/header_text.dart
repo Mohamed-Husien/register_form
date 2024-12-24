@@ -5,9 +5,8 @@ class HeaderText extends StatelessWidget {
     super.key,
     required this.text1,
     required this.text2,
-    required this.text3,
   });
-  final String text1, text2, text3;
+  final String text1, text2;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,14 +28,14 @@ class HeaderText extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          text3,
-          style: const TextStyle(
-            color: Color(0xff1B2B51),
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        // Text(
+        //   text3,
+        //   style: const TextStyle(
+        //     color: Color(0xff1B2B51),
+        //     fontSize: 32,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
       ],
     );
   }
