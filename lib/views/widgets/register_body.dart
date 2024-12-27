@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:register_app/views/widgets/custom_text_form_field.dart';
 import 'package:register_app/views/widgets/header_text.dart';
 import 'package:register_app/views/widgets/register_part.dart';
 
