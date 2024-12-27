@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
       onSaved: onSaved,
       validator: validator,
       maxLines: maxLines,
-      cursorColor: const Color(0xffA2A8B7),
+      cursorColor: const Color(0xff007BFF),
       style: const TextStyle(
         color: Colors.black, // <-- Change text color to white
       ),

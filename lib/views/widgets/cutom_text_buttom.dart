@@ -18,7 +18,7 @@ class CustomTextButton extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(
-            color: Color(0xff7A7C91),
+            color: Color(0xffFF5722),
           ),
         ));
   }

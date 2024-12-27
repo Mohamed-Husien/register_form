@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_app/helpers/validate_email.dart';
+import 'package:register_app/helpers/validate_name.dart';
 import 'package:register_app/helpers/validate_password.dart';
 import 'package:register_app/views/widgets/custom_button.dart';
 import 'package:register_app/views/widgets/custom_text_form_field.dart';
@@ -16,7 +17,7 @@ class _RegisterPartState extends State<RegisterPart> {
   bool isSecurePassword = true;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? password, email;
+  String? password, email, name;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,8 +33,16 @@ class _RegisterPartState extends State<RegisterPart> {
               onChanged: (value) {
                 email = value;
               },
+              validator: (value) => validateName(value),
+              hint: 'Name',
+            ),
+            const SizedBox(height: 24),
+            CustomTextFormField(
+              onChanged: (value) {
+                email = value;
+              },
               validator: (value) => validateEmail(value),
-              hint: 'Your Email',
+              hint: 'Email',
             ),
             const SizedBox(height: 24),
             //---------------------------------------------
@@ -66,7 +75,7 @@ class _RegisterPartState extends State<RegisterPart> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("You don't have an account?"),
+                const Text("You already have an account?"),
                 CustomTextButton(
                   onPressed: () {
                     // Navigator.push(
@@ -78,7 +87,7 @@ class _RegisterPartState extends State<RegisterPart> {
                     //   )),
                     // );
                   },
-                  text: "Register",
+                  text: "Sign In",
                 ),
                 const SizedBox(
                   height: 8,
@@ -99,10 +108,13 @@ class _RegisterPartState extends State<RegisterPart> {
         });
       },
       icon: isSecurePassword
-          ? const Icon(Icons.visibility_off)
+          ? const Icon(
+              Icons.visibility_off,
+              color: Color(0xff007BFF),
+            )
           : const Icon(
               Icons.visibility,
-              color: Colors.grey,
+              color: Color(0xff007BFF),
             ),
     );
   }
