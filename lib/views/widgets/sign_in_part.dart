@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:register_app/cubits/register_cubit/register_cubit.dart';
-import 'package:register_app/cubits/store_user_data_cubit/store_user_data_cubit.dart';
-import 'package:register_app/helpers/show_snack_bar_function.dart';
+import 'package:register_app/cubits/sing_in_cubit/sigin_in_cubit.dart';
 import 'package:register_app/helpers/validate_email.dart';
-import 'package:register_app/helpers/validate_name.dart';
 import 'package:register_app/helpers/validate_password.dart';
-import 'package:register_app/models/user_data_model.dart';
-import 'package:register_app/views/pages/next_page.dart';
-import 'package:register_app/views/pages/sign_in_page.dart';
-import 'package:register_app/views/widgets/conditions_and_terms_part.dart';
+import 'package:register_app/views/pages/register_page.dart';
 import 'package:register_app/views/widgets/custom_button.dart';
 import 'package:register_app/views/widgets/custom_text_form_field.dart';
 import 'package:register_app/views/widgets/cutom_text_buttom.dart';
 
-class RegisterPart extends StatefulWidget {
-  const RegisterPart({super.key});
+class SingInPart extends StatefulWidget {
+  const SingInPart({super.key});
 
   @override
-  State<RegisterPart> createState() => _RegisterPartState();
+  State<SingInPart> createState() => _SingInPartState();
 }
 
-class _RegisterPartState extends State<RegisterPart> {
+class _SingInPartState extends State<SingInPart> {
   bool isSecurePassword = true;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? password, email, name;
+  String? password, email;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,18 +33,10 @@ class _RegisterPartState extends State<RegisterPart> {
           children: [
             CustomTextFormField(
               onChanged: (value) {
-                name = value;
-              },
-              validator: (value) => validateName(value),
-              hint: 'Name',
-            ),
-            const SizedBox(height: 24),
-            CustomTextFormField(
-              onChanged: (value) {
                 email = value;
               },
               validator: (value) => validateEmail(value),
-              hint: 'Email',
+              hint: 'Your Email',
             ),
             const SizedBox(height: 24),
             //---------------------------------------------
@@ -65,34 +51,15 @@ class _RegisterPartState extends State<RegisterPart> {
               hint: 'Password',
             ),
             //--------------------------------------------
-            const SizedBox(height: 24),
-            const TermsAndConditionsRow(),
-            const SizedBox(height: 32),
+            const SizedBox(height: 120),
             CustomButton(
+              text: "Sign In",
               width: double.infinity,
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  try {
-                    BlocProvider.of<RegisterCubit>(context)
-                        .createUserMethod(email: email!, password: password!);
-                    BlocProvider.of<StoreUserDataCubit>(context).addUser(
-                      userDateModel: UserDataModel(
-                          name: name ?? " ",
-                          email: email ?? " ",
-                          password: password ?? " "),
-                    );
-                    showSnachBarFun(context, "Register Done Successfully");
-
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NextPage(),
-                      ),
-                    );
-                  } catch (e) {
-                    showSnachBarFun(context, e.toString());
-                  }
+                  BlocProvider.of<SignInCubit>(context)
+                      .loginUser(email: email!, password: password!);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                 }
@@ -103,19 +70,19 @@ class _RegisterPartState extends State<RegisterPart> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("You already have an account?"),
+                const Text("You don't have an account?"),
                 CustomTextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       (MaterialPageRoute(
                         builder: (context) {
-                          return const SignInPage();
+                          return const RegisterPage();
                         },
                       )),
                     );
                   },
-                  text: "Sign In",
+                  text: "Register",
                 ),
                 const SizedBox(
                   height: 8,
@@ -136,13 +103,10 @@ class _RegisterPartState extends State<RegisterPart> {
         });
       },
       icon: isSecurePassword
-          ? const Icon(
-              Icons.visibility_off,
-              color: Color(0xff007BFF),
-            )
+          ? const Icon(Icons.visibility_off)
           : const Icon(
               Icons.visibility,
-              color: Color(0xff007BFF),
+              color: Colors.grey,
             ),
     );
   }

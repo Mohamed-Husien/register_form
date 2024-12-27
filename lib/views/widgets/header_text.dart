@@ -16,7 +16,7 @@ class HeaderText extends StatelessWidget {
           text1,
           style: const TextStyle(
             color: Color(0xff2C385D),
-            fontSize: 48,
+            fontSize: 32,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -24,7 +24,7 @@ class HeaderText extends StatelessWidget {
           text2,
           style: const TextStyle(
             color: Color(0xff1B2B51),
-            fontSize: 32,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
