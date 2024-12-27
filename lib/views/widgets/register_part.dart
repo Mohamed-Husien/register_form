@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:register_app/cubits/register_cubit/register_cubit.dart';
+import 'package:register_app/cubits/store_user_data_cubit/store_user_data_cubit.dart';
+import 'package:register_app/helpers/show_snack_bar_function.dart';
 import 'package:register_app/helpers/validate_email.dart';
 import 'package:register_app/helpers/validate_name.dart';
 import 'package:register_app/helpers/validate_password.dart';
+import 'package:register_app/models/user_data_model.dart';
+import 'package:register_app/views/pages/next_page.dart';
 import 'package:register_app/views/widgets/custom_button.dart';
 import 'package:register_app/views/widgets/custom_text_form_field.dart';
 import 'package:register_app/views/widgets/cutom_text_buttom.dart';
@@ -31,7 +37,7 @@ class _RegisterPartState extends State<RegisterPart> {
           children: [
             CustomTextFormField(
               onChanged: (value) {
-                email = value;
+                name = value;
               },
               validator: (value) => validateName(value),
               hint: 'Name',
@@ -63,8 +69,26 @@ class _RegisterPartState extends State<RegisterPart> {
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  // BlocProvider.of<SignInCubit>(context)
-                  //     .loginUser(email: email!, password: password!);
+                  try {
+                    BlocProvider.of<RegisterCubit>(context)
+                        .createUserMethod(email: email!, password: password!);
+                    BlocProvider.of<StoreUserDataCubit>(context).addUser(
+                      userDateModel: UserDataModel(
+                          name: name ?? " ",
+                          email: email ?? " ",
+                          password: password ?? " "),
+                    );
+                    showSnachBarFun(context, "Register Done Successfully");
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NextPage(),
+                      ),
+                    );
+                  } catch (e) {
+                    showSnachBarFun(context, e.toString());
+                  }
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                 }

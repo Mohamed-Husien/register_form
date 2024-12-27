@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:register_app/cubits/register_cubit/register_cubit.dart';
 import 'package:register_app/cubits/sing_in_cubit/sigin_in_cubit.dart';
+import 'package:register_app/cubits/store_user_data_cubit/store_user_data_cubit.dart';
 import 'package:register_app/firebase_options.dart';
 import 'package:register_app/views/pages/register_page.dart';
 
@@ -26,6 +27,9 @@ class RegisterApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SignInCubit(),
+        ),
+        BlocProvider(
+          create: (context) => StoreUserDataCubit(),
         ),
       ],
       child: MaterialApp(
