@@ -8,7 +8,7 @@ class CustomButton extends StatelessWidget {
       {super.key,
       required this.onTap,
       this.width = 180,
-      this.text = "Sign in"});
+      this.text = "Register"});
 
   @override
   Widget build(BuildContext context) {
