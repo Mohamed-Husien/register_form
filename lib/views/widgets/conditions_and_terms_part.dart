@@ -4,10 +4,10 @@ class TermsAndConditionsRow extends StatefulWidget {
   const TermsAndConditionsRow({super.key});
 
   @override
-  _TermsAndConditionsRowState createState() => _TermsAndConditionsRowState();
+  TermsAndConditionsRowState createState() => TermsAndConditionsRowState();
 }
 
-class _TermsAndConditionsRowState extends State<TermsAndConditionsRow> {
+class TermsAndConditionsRowState extends State<TermsAndConditionsRow> {
   bool isChecked = false;
 
   @override
