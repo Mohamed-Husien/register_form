@@ -73,14 +73,7 @@ class _SingInPartState extends State<SingInPart> {
                 const Text("You don't have an account?"),
                 CustomTextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      (MaterialPageRoute(
-                        builder: (context) {
-                          return const RegisterPage();
-                        },
-                      )),
-                    );
+                    Navigator.pop(context);
                   },
                   text: "Register",
                 ),
