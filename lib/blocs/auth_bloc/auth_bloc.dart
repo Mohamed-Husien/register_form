@@ -31,6 +31,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 erorrMessage: 'There was an error please try again!'));
           }
         }
+        if (event is LoginEvent) {
+          emit(SignInLoading());
+          try {
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: event.email, password: event.password);
+            emit(SignInSuccess());
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'user-not-found') {
+              emit(
+                  SignInFailure(erorrMessage: 'No user found for that email.'));
+            } else if (e.code == 'wrong-password') {
+              emit(SignInFailure(
+                  erorrMessage: 'Wrong password provided for that user.'));
+            }
+          } catch (e) {
+            emit(SignInFailure(
+                erorrMessage: 'There was an error please try again!'));
+          }
+        }
       },
     );
   }
