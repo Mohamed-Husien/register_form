@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:register_app/cubits/register_cubit/register_cubit.dart';
+import 'package:register_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:register_app/helpers/show_snack_bar_function.dart';
 import 'package:register_app/views/widgets/register_body.dart';
 
@@ -12,7 +12,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLoading = false;
 
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;

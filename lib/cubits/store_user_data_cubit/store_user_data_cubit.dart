@@ -7,22 +7,19 @@ part 'store_user_data_state.dart';
 
 class StoreUserDataCubit extends Cubit<StoreUserDataState> {
   StoreUserDataCubit() : super(StoreUserDataInitial());
-  final CollectionReference users =
-      FirebaseFirestore.instance.collection('users');
 
   Future<void> addUser({required UserDataModel userDateModel}) async {
+    final CollectionReference users =
+        FirebaseFirestore.instance.collection('users');
     emit(StoreUserDataLoading());
     try {
-      // Call the user's CollectionReference to add a new user
       await users.add({
-        'full_name': userDateModel.name, // e.g., John Doe
-        'email': userDateModel.email, // e.g., Stokes and Sons
-        'password': userDateModel.password, // e.g., 42
-        'created_at':
-            FieldValue.serverTimestamp(), // Optional: track creation time
+        'full_name': userDateModel.name,
+        'email': userDateModel.email,
+        'password': userDateModel.password,
+        'created_at': FieldValue.serverTimestamp(),
       });
-      emit(
-          StoreUserDataSuccess()); // You can emit a state if needed to notify success
+      emit(StoreUserDataSuccess());
     } catch (e) {
       // Handle errors if needed
       emit(
