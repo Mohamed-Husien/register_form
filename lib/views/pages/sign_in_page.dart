@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:register_app/cubits/sing_in_cubit/sigin_in_cubit.dart';
+import 'package:register_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:register_app/helpers/show_snack_bar_function.dart';
 import 'package:register_app/views/widgets/sign_in_body.dart';
 
@@ -12,7 +12,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLoading = false;
 
-    return BlocConsumer<SignInCubit, SignInState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is SignInLoading) {
           isLoading = true;

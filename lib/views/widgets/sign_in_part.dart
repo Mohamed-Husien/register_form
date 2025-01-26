@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:register_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:register_app/cubits/sing_in_cubit/sigin_in_cubit.dart';
 import 'package:register_app/helpers/validate_email.dart';
 import 'package:register_app/helpers/validate_password.dart';
@@ -58,8 +59,9 @@ class _SingInPartState extends State<SingInPart> {
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  BlocProvider.of<SignInCubit>(context)
-                      .loginUser(email: email!, password: password!);
+                  BlocProvider.of<AuthBloc>(context).add(
+                    LoginEvent(email: email!, password: password!),
+                  );
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                 }
