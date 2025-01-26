@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:register_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:register_app/cubits/sing_in_cubit/sigin_in_cubit.dart';
 import 'package:register_app/helpers/validate_email.dart';
 import 'package:register_app/helpers/validate_password.dart';
-import 'package:register_app/views/pages/register_page.dart';
 import 'package:register_app/views/widgets/custom_button.dart';
 import 'package:register_app/views/widgets/custom_text_form_field.dart';
 import 'package:register_app/views/widgets/cutom_text_buttom.dart';

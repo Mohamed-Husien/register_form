@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:register_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:register_app/cubits/register_cubit/register_cubit.dart';
+
 import 'package:register_app/cubits/store_user_data_cubit/store_user_data_cubit.dart';
 import 'package:register_app/helpers/show_snack_bar_function.dart';
 import 'package:register_app/helpers/validate_email.dart';

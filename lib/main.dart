@@ -6,6 +6,7 @@ import 'package:register_app/cubits/register_cubit/register_cubit.dart';
 import 'package:register_app/cubits/sing_in_cubit/sigin_in_cubit.dart';
 import 'package:register_app/cubits/store_user_data_cubit/store_user_data_cubit.dart';
 import 'package:register_app/firebase_options.dart';
+import 'package:register_app/simple_bloc_observer.dart';
 import 'package:register_app/views/pages/register_page.dart';
 
 void main() async {
@@ -13,7 +14,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const RegisterApp());
+  BlocOverrides.runZoned(
+    () {
+      runApp(const RegisterApp());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class RegisterApp extends StatelessWidget {
